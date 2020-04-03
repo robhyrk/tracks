@@ -1,4 +1,4 @@
-// import '../_mockLocations'
+import '../_mockLocations'
 
 import React, {useContext} from 'react'
 import {StyleSheet} from 'react-native'
@@ -11,8 +11,10 @@ import TrackForm from '../components/TrackForm'
 
 
 const TrackCreateScreen = ({isFocused}) => {
-    const {addLocation} = useContext(LocationContext)
-    const [err] = useLocation(isFocused, addLocation)
+    const {state, addLocation} = useContext(LocationContext)
+    const [err] = useLocation(isFocused, (location)=>{
+        addLocation(location, state.recording)
+    })
 
     return (
     <SafeAreaView forceInset={{top: 'always'}}>
